@@ -47,12 +47,21 @@ public class MainActivity extends AppCompatActivity{
         btnRandom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Random random = new Random();
-                int indexRandom = random.nextInt(listNumbers.size());
-                int valueRandom = listNumbers.get(indexRandom);
-                tvRandom.setText(String.valueOf(valueRandom));
-                result =  " - " + valueRandom  + result;
-                tvHistory.setText(result);
+                if (listNumbers.size() > 0) {
+                    Random random = new Random();
+                    int indexRandom = random.nextInt(listNumbers.size());
+                    int valueRandom = listNumbers.get(indexRandom);
+                    tvRandom.setText(String.valueOf(valueRandom));
+                    if (listNumbers.size() == 1) {
+                        result = valueRandom  + result;
+                    } else {
+                        result =  " - " + valueRandom  + result;
+                    }
+                    tvHistory.setText(result);
+                    listNumbers.remove(indexRandom);
+                } else {
+                    Toast.makeText(MainActivity.this, "Hết số random", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
