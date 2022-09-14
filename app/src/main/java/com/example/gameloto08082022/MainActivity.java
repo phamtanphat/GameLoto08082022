@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity{
     TextView tvRandom, tvHistory;
     AppCompatButton btnReset, btnRandom;
     List<Integer> listNumbers;
+    String result = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +51,8 @@ public class MainActivity extends AppCompatActivity{
                 int indexRandom = random.nextInt(listNumbers.size());
                 int valueRandom = listNumbers.get(indexRandom);
                 tvRandom.setText(String.valueOf(valueRandom));
+                result =  " - " + valueRandom  + result;
+                tvHistory.setText(result);
             }
         });
     }
