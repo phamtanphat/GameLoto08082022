@@ -10,12 +10,16 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
+import java.util.Vector;
 
 public class MainActivity extends AppCompatActivity{
 
     TextView tvRandom, tvHistory;
     AppCompatButton btnReset, btnRandom;
+    List<Integer> listNumbers;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,12 +30,27 @@ public class MainActivity extends AppCompatActivity{
         btnReset = findViewById(R.id.appcompat_button_reset);
         btnRandom = findViewById(R.id.appcompat_button_random);
 
-        btnReset.setOnClickListener(new View.OnClickListener() {
+        initData();
+        event();
+    }
+
+    private void initData() {
+        listNumbers = new ArrayList<>();
+
+        for (int i = 1; i <= 100 ; i++) {
+            listNumbers.add(i);
+        }
+    }
+
+    private void event() {
+        btnRandom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "Click button reset", Toast.LENGTH_SHORT).show();
+                Random random = new Random();
+                int indexRandom = random.nextInt(listNumbers.size());
+                int valueRandom = listNumbers.get(indexRandom);
+                tvRandom.setText(String.valueOf(valueRandom));
             }
         });
     }
-
 }
