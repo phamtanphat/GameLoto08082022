@@ -38,6 +38,10 @@ public class MainActivity extends AppCompatActivity{
     private void initData() {
         listNumbers = new ArrayList<>();
 
+        addNumberToArray(listNumbers);
+    }
+
+    private void addNumberToArray(List<Integer> listNumbers) {
         for (int i = 1; i <= 100 ; i++) {
             listNumbers.add(i);
         }
@@ -61,6 +65,21 @@ public class MainActivity extends AppCompatActivity{
                     listNumbers.remove(indexRandom);
                 } else {
                     Toast.makeText(MainActivity.this, "Hết số random", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        btnReset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                result = "";
+                tvRandom.setText(result);
+                tvHistory.setText(result);
+
+                if (listNumbers.size() > 0) {
+                    listNumbers.clear();
+                } else {
+                    addNumberToArray(listNumbers);
                 }
             }
         });
